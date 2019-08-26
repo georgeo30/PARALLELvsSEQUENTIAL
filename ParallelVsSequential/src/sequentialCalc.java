@@ -20,11 +20,13 @@ public class sequentialCalc {
      * @param fileW 
      */
     public static void average(String fileR,String fileW){
+        
         float xTotal=0;
         float yTotal=0;
         Vector wind=new Vector();
         CloudData obj=new CloudData();
         obj.readData(fileR);
+        tick();
         for(int t = 0; t < obj.dimt; t++)
             for(int x = 0; x < obj.dimx; x++)
                 for(int y = 0; y < obj.dimy; y++){
@@ -43,6 +45,8 @@ public class sequentialCalc {
 		}
         wind.x=xTotal/obj.dim();
         wind.y=yTotal/obj.dim();
+        float time=tock();
+        System.out.println("Run Took: "+time+ " seconds");
         obj.writeData(fileW, wind);
     }
     /**
@@ -101,7 +105,20 @@ public class sequentialCalc {
         float magnitude=(float)Math.sqrt((localAvgX*localAvgX)+(localAvgY*localAvgY));
         return magnitude;
     }
-    
+    public static long startTime=0;
+    /**
+     * method used to start the timer
+     */
+    public static void tick(){
+        startTime=System.currentTimeMillis();
+    }
+    /**
+     * Method used to return the time taken in seconds
+     * @return 
+     */
+    public static float tock(){
+        return (System.currentTimeMillis()-startTime)/1000.0f;
+    }
     /**
      * Main method currently gets the name of the file to read and written to.
      * makes a call to the average method
@@ -114,6 +131,7 @@ public class sequentialCalc {
         System.out.println("File out");
         String fileW=in.nextLine();
         average(fileR,fileW);
+        
                 
     }
 }

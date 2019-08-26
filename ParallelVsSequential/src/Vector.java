@@ -6,7 +6,7 @@
 
 /**
  *
- * @author George
+ * @author Georgeo
  */
 public class Vector {
     public Float x;
