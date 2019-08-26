@@ -22,10 +22,28 @@ public class sequentialCalc {
                 for(int y = 0; y < obj.dimy; y++){
                     xTotal+=obj.advection[t][x][y].x;
                     yTotal+=obj.advection[t][x][y].y;
+                    localAverage(t,x,y,obj);
 		}
         wind.x=xTotal/obj.dim();
         wind.y=yTotal/obj.dim();
         obj.writeData(fileW, wind);
+    }
+    public static void localAverage(int t,int x,int y,CloudData obj){
+        float localAvgX=0;
+        float localAvgY=0;
+        if(x==0&&y==0){
+            localAvgX=obj.advection[t][x][y].x+obj.advection[t][x+1][y+1].x+obj.advection[t][x+1][y].x+obj.advection[t][x][y+1].x;
+        }
+        else if(x==obj.dimx&y==obj.dimy){
+            localAvgX=obj.advection[t][x][y].x+obj.advection[t][x-1][y-1].x+obj.advection[t][x-1][y].x+obj.advection[t][x][y-1].x;
+        }
+        else if(x==0&y==obj.dimy){
+            localAvgX=obj.advection[t][x][y].x+obj.advection[t][x+1][y-1].x+obj.advection[t][x+1][y].x+obj.advection[t][x][y-1].x;
+        }
+        else if(x==obj.dimx&&y==0){
+            localAvgX=obj.advection[t][x][y].  x+obj.advection[t][x-1][y+1].x+obj.advection[t][x-1][y].x+obj.advection[t][x][y+1].x;
+        }
+        
     }
     
     public static void main(String[] args) {
