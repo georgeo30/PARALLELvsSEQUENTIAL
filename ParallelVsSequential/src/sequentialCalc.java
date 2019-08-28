@@ -12,11 +12,11 @@ import java.util.Scanner;
 import java.lang.Math;
 public class sequentialCalc {
     /**
-     * The average method is used to trace through the each time step and the matric within it
+     * The average method is used to trace through the each time step and the matrix within it
      * It will calculate the total average of the x and y components and store it in a vector object that it sent as an argument to writeData method in cloud data
-     * It also has a call to the localAverage method within this class to return the wind magnitudde of the current element in the matrix
+     * It also has a call to the localAverage method within this class to return the wind magnitude of the current element in the matrix
      * The classification is determined for each element using the wind magnitude and the uplift.
-     * @param fileR
+     * @param fileR 
      * @param fileW 
      */
     public static void average(String fileR,String fileW){
@@ -36,7 +36,7 @@ public class sequentialCalc {
                     if(Math.abs(obj.convection[t][x][y])>magnitude){
                         obj.classification[t][x][y]=0;
                     }
-                    else if(magnitude>0.2&&magnitude>=Math.abs(obj.convection[t][x][y])){
+                    else if((magnitude>0.2)/**&&(magnitude>=Math.abs(obj.convection[t][x][y]))*/){
                         obj.classification[t][x][y]=1;
                     }
                     else{
@@ -98,8 +98,8 @@ public class sequentialCalc {
             localAvgY=(obj.advection[t][x][y].y+obj.advection[t][x+1][y-1].y+obj.advection[t][x+1][y].y+obj.advection[t][x][y-1].y+obj.advection[t][x-1][y-1].y+obj.advection[t][x-1][y].y)/6;
         }
         else{
-            localAvgX=(obj.advection[t][x][y].x+obj.advection[t][x+1][y-1].x+obj.advection[t][x+1][y].x+obj.advection[t][x][y-1].x+obj.advection[t][x-1][y-1].x+obj.advection[t][x-1][y].x+obj.advection[t][x+1][y-1].x+obj.advection[t][x][y+1].x+obj.advection[t][x+1][y+1].x)/9;
-            localAvgY=(obj.advection[t][x][y].y+obj.advection[t][x+1][y-1].y+obj.advection[t][x+1][y].y+obj.advection[t][x][y-1].y+obj.advection[t][x-1][y-1].y+obj.advection[t][x-1][y].y+obj.advection[t][x+1][y-1].y+obj.advection[t][x][y+1].y+obj.advection[t][x+1][y+1].y)/9;
+            localAvgX=(obj.advection[t][x][y].x+obj.advection[t][x+1][y-1].x+obj.advection[t][x+1][y].x+obj.advection[t][x][y-1].x+obj.advection[t][x-1][y-1].x+obj.advection[t][x-1][y].x+obj.advection[t][x-1][y+1].x+obj.advection[t][x][y+1].x+obj.advection[t][x+1][y+1].x)/9;
+            localAvgY=(obj.advection[t][x][y].y+obj.advection[t][x+1][y-1].y+obj.advection[t][x+1][y].y+obj.advection[t][x][y-1].y+obj.advection[t][x-1][y-1].y+obj.advection[t][x-1][y].y+obj.advection[t][x-1][y+1].y+obj.advection[t][x][y+1].y+obj.advection[t][x+1][y+1].y)/9;
 
         }
         float magnitude=(float)Math.sqrt((localAvgX*localAvgX)+(localAvgY*localAvgY));
