@@ -16,6 +16,7 @@ public class parallelCalc {
 	  return fjPool.invoke(new Parallel(obj,0,size));
 	}
     public static void main(String[] args) {
+        Vector wind=new Vector();
         CloudData obj=new CloudData();
         Scanner in =new Scanner(System.in);
         System.out.println("File in");
@@ -26,7 +27,8 @@ public class parallelCalc {
         int size=obj.dim();
         //System.out.println(size);
         Vector ans=sum(obj,size);
-        System.out.println((ans.x)/obj.dim()+"and "+ans.y/obj.dim());
-        
+        wind.x=(ans.x)/obj.dim();
+        wind.y=ans.y/obj.dim();
+        obj.writeData(fileW, wind);
     }
 }
