@@ -13,7 +13,7 @@ public class Parallel extends RecursiveTask<Vector> {
     CloudData obj;
     int hi;
     int lo;
-    static final int SEQUENTIAL_CUTOFF=2;
+    static final int SEQUENTIAL_CUTOFF=1000;
     int[] ind=new int[3];
     float xTotal=0;
     float yTotal=0;
@@ -29,15 +29,19 @@ public class Parallel extends RecursiveTask<Vector> {
         Vector current=new Vector();
         if((hi-lo) < SEQUENTIAL_CUTOFF) {
 			
-		      for(int i=lo; i < hi; i++)
+		      for(int i=lo; i < hi; i++){
 		        obj.locate(i, ind);
                         int t=ind[0];
                         int x=ind[1];
+                        
                         int y=ind[2];
                         xTotal+=obj.advection[t][x][y].x;
+                        
                         yTotal+=obj.advection[t][x][y].y;
+                        //localAverage(t,x,y,obj);
                         current.x=xTotal;
                         current.y=yTotal;
+                      }
                         return current;
 		  }
 		  else {
@@ -58,4 +62,6 @@ public class Parallel extends RecursiveTask<Vector> {
 		  }
         
     }
+    
+   
 }

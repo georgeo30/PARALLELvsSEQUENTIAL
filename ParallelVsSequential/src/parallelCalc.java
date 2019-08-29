@@ -24,8 +24,9 @@ public class parallelCalc {
         String fileW=in.nextLine();
         obj.readData(fileR);
         int size=obj.dim();
+        //System.out.println(size);
         Vector ans=sum(obj,size);
-        System.out.println(ans.x+"and "+ans.y);
+        System.out.println((ans.x)/obj.dim()+"and "+ans.y/obj.dim());
         
     }
 }
