@@ -9,36 +9,52 @@
  * @author George
  */
 import java.util.concurrent.RecursiveTask;
-public class Parallel extends RecursiveTask<Float> {
+public class Parallel extends RecursiveTask<Vector> {
     CloudData obj;
     int hi;
     int lo;
-    static final int SEQUENTIAL_CUTOFF=500;
-    
+    static final int SEQUENTIAL_CUTOFF=2;
+    int[] ind=new int[3];
+    float xTotal=0;
+    float yTotal=0;
+    Vector wind=new Vector();
     Parallel(CloudData obj,int lo,int size){
         this.obj=obj;
         this.hi=size;
         this.lo=lo;
     }
-
+    
     @Override
-    protected Float compute() {
+    protected Vector compute() {
+        Vector current=new Vector();
         if((hi-lo) < SEQUENTIAL_CUTOFF) {
-			  int ans = 0;
+			
 		      for(int i=lo; i < hi; i++)
-		        ans += arr[i];
-		      return ans;
+		        obj.locate(i, ind);
+                        int t=ind[0];
+                        int x=ind[1];
+                        int y=ind[2];
+                        xTotal+=obj.advection[t][x][y].x;
+                        yTotal+=obj.advection[t][x][y].y;
+                        current.x=xTotal;
+                        current.y=yTotal;
+                        return current;
 		  }
 		  else {
-			  Parallel left = new SumArray(arr,lo,(hi+lo)/2);
-			  Parallel right= new SumArray(arr,(hi+lo)/2,hi);
+			  Parallel left = new Parallel(obj,lo,(hi+lo)/2);
+			  Parallel right= new Parallel(obj,(hi+lo)/2,hi);
 			  
 			  // order of next 4 lines
 			  // essential â€“ why?
 			  left.fork();
-			  int rightAns = right.compute();
-			  int leftAns  = left.join();
-			  return leftAns + rightAns;     
+			  Vector rightAns = right.compute();
+			  Vector leftAns  = left.join();
+                          float xV=(rightAns.x+leftAns.x);
+                          
+                          float yV=(rightAns.y+leftAns.y);
+                          wind.x=xV;
+                          wind.y=yV;
+			  return wind;      
 		  }
         
     }

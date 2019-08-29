@@ -12,7 +12,7 @@ import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
 public class parallelCalc {
     static final ForkJoinPool fjPool = new ForkJoinPool();
-	static Float sum(CloudData obj,int size){
+	static Vector sum(CloudData obj,int size){
 	  return fjPool.invoke(new Parallel(obj,0,size));
 	}
     public static void main(String[] args) {
@@ -22,8 +22,10 @@ public class parallelCalc {
         String fileR=in.nextLine();
         System.out.println("File out");
         String fileW=in.nextLine();
-        obj.readData(fileW);
+        obj.readData(fileR);
         int size=obj.dim();
+        Vector ans=sum(obj,size);
+        System.out.println(ans.x+"and "+ans.y);
         
     }
 }
