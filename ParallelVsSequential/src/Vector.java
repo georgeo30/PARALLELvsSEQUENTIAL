@@ -16,4 +16,8 @@ public class Vector {
         this.x=null;
         this.y=null;
     }
+    Vector(Float x, Float y){
+        this.x=x;
+        this.y=y;
+    }
 }

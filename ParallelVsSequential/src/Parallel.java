@@ -26,7 +26,7 @@ public class Parallel extends RecursiveTask<Vector> {
     
     @Override
     protected Vector compute() {
-        Vector current =new Vector();
+        //Vector current =new Vector();
         if((hi-lo) < SEQUENTIAL_CUTOFF) {
 			//Vector current =new Vector();
 		      for(int i=lo; i < hi; i++){
@@ -39,10 +39,10 @@ public class Parallel extends RecursiveTask<Vector> {
                         
                         yTotal+=obj.advection[t][x][y].y;
                         localAverage(t,x,y,obj);
-                        current.x=xTotal;
-                        current.y=yTotal;
+                        //current.x=xTotal;
+                        //current.y=yTotal;
                       }
-                        return current;
+                        return new Vector(xTotal,yTotal);
 		  }
 		  else {
 			  Parallel left = new Parallel(obj,lo,(hi+lo)/2);
@@ -53,11 +53,8 @@ public class Parallel extends RecursiveTask<Vector> {
 			  left.fork();
 			  Vector rightAns = right.compute();
 			  Vector leftAns  = left.join();
-                          wind.x=(rightAns.x+leftAns.x);
-                          
-                          wind.y=(rightAns.y+leftAns.y);
-                          
-			  return wind;      
+                                                   
+			  return new Vector(rightAns.x+leftAns.x,rightAns.y+leftAns.y);      
 		  }
         
     }
