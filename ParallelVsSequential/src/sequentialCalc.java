@@ -32,16 +32,9 @@ public class sequentialCalc {
                 for(int y = 0; y < obj.dimy; y++){
                     xTotal+=obj.advection[t][x][y].x;
                     yTotal+=obj.advection[t][x][y].y;
-                    float magnitude=localAverage(t,x,y,obj);
-                    if(Math.abs(obj.convection[t][x][y])>magnitude){
-                        obj.classification[t][x][y]=0;
-                    }
-                    else if((magnitude>0.2)/**&&(magnitude>=Math.abs(obj.convection[t][x][y]))*/){
-                        obj.classification[t][x][y]=1;
-                    }
-                    else{
-                        obj.classification[t][x][y]=2;
-                    }
+                    localAverage(t,x,y,obj);
+                    
+                    
 		}
         wind.x=xTotal/obj.dim();
         wind.y=yTotal/obj.dim();
@@ -58,7 +51,7 @@ public class sequentialCalc {
      * @param obj
      * @return 
      */
-    public static float localAverage(int t,int x,int y,CloudData obj){
+    public static void localAverage(int t,int x,int y,CloudData obj){
         float localAvgX=0;
         float localAvgY=0;
         if(x==0&&y==0){
@@ -103,7 +96,16 @@ public class sequentialCalc {
 
         }
         float magnitude=(float)Math.sqrt((localAvgX*localAvgX)+(localAvgY*localAvgY));
-        return magnitude;
+        if(Math.abs(obj.convection[t][x][y])>magnitude){
+                        obj.classification[t][x][y]=0;
+                    }
+                    else if((magnitude>0.2)/**&&(magnitude>=Math.abs(obj.convection[t][x][y]))*/){
+                        obj.classification[t][x][y]=1;
+                    }
+                    else{
+                        obj.classification[t][x][y]=2;
+                    }
+        
     }
     public static long startTime=0;
     /**

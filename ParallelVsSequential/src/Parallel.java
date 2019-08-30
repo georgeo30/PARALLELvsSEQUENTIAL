@@ -13,7 +13,7 @@ public class Parallel extends RecursiveTask<Vector> {
     CloudData obj;
     int hi;
     int lo;
-    static final int SEQUENTIAL_CUTOFF=1000;
+    static final int SEQUENTIAL_CUTOFF=10000;
     int[] ind=new int[3];
     float xTotal=0;
     float yTotal=0;
@@ -26,9 +26,9 @@ public class Parallel extends RecursiveTask<Vector> {
     
     @Override
     protected Vector compute() {
-        Vector current=new Vector();
+        Vector current =new Vector();
         if((hi-lo) < SEQUENTIAL_CUTOFF) {
-			
+			//Vector current =new Vector();
 		      for(int i=lo; i < hi; i++){
 		        obj.locate(i, ind);
                         int t=ind[0];
@@ -53,11 +53,10 @@ public class Parallel extends RecursiveTask<Vector> {
 			  left.fork();
 			  Vector rightAns = right.compute();
 			  Vector leftAns  = left.join();
-                          float xV=(rightAns.x+leftAns.x);
+                          wind.x=(rightAns.x+leftAns.x);
                           
-                          float yV=(rightAns.y+leftAns.y);
-                          wind.x=xV;
-                          wind.y=yV;
+                          wind.y=(rightAns.y+leftAns.y);
+                          
 			  return wind;      
 		  }
         

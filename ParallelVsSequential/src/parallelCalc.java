@@ -26,9 +26,27 @@ public class parallelCalc {
         obj.readData(fileR);
         int size=obj.dim();
         //System.out.println(size);
+        System.gc();
+        tick();
         Vector ans=sum(obj,size);
+        float time=tock();
+        System.out.println("Run Took: "+time+ " seconds");
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
         obj.writeData(fileW, wind);
+    }
+    public static long startTime=0;
+    /**
+     * method used to start the timer
+     */
+    public static void tick(){
+        startTime=System.currentTimeMillis();
+    }
+    /**
+     * Method used to return the time taken in seconds
+     * @return 
+     */
+    public static float tock(){
+        return (System.currentTimeMillis()-startTime)/1000.0f;
     }
 }
