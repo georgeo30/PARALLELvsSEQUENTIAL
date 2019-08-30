@@ -26,11 +26,15 @@ public class parallelCalc {
         obj.readData(fileR);
         int size=obj.dim();
         //System.out.println(size);
-        System.gc();
-        tick();
-        Vector ans=sum(obj,size);
-        float time=tock();
-        System.out.println("Run Took: "+time+ " seconds");
+        float time=0;
+        Vector ans=new Vector();
+        for(int i=0;i<5;i++){
+            System.gc();
+            tick();
+            ans=sum(obj,size);
+            time=time+tock();
+        }
+        System.out.println("Run Took: "+time/5+ " seconds");
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
         obj.writeData(fileW, wind);

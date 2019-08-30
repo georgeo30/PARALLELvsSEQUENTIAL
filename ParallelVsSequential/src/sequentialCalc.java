@@ -21,11 +21,14 @@ public class sequentialCalc {
      */
     public static void average(String fileR,String fileW){
         
-        float xTotal=0;
-        float yTotal=0;
+        
         Vector wind=new Vector();
         CloudData obj=new CloudData();
         obj.readData(fileR);
+        float time=0;
+        for(int i=0;i<5;i++){
+        float xTotal=0;
+        float yTotal=0;
         tick();
         for(int t = 0; t < obj.dimt; t++)
             for(int x = 0; x < obj.dimx; x++)
@@ -38,8 +41,9 @@ public class sequentialCalc {
 		}
         wind.x=xTotal/obj.dim();
         wind.y=yTotal/obj.dim();
-        float time=tock();
-        System.out.println("Run Took: "+time+ " seconds");
+        time=time+tock();
+        }
+        System.out.println("Run Took: "+time/5+ " seconds");
         obj.writeData(fileW, wind);
     }
     /**
