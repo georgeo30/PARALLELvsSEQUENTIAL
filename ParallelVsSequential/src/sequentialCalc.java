@@ -8,6 +8,7 @@
  *
  * @author Georgeo
  */
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.lang.Math;
 public class sequentialCalc {
@@ -43,6 +44,7 @@ public class sequentialCalc {
         time=time+tock();
         }
         System.out.println("Run Took: "+time/5+ " seconds");
+        writeTooFile(time/5);
         obj.writeData(fileW, wind);
     }
     /**
@@ -123,6 +125,22 @@ public class sequentialCalc {
      */
     public static float tock(){
         return (System.currentTimeMillis()-startTime)/1000.0f;
+    }
+    /**
+     * Write to sequential time to a file method
+     * @param value 
+     */
+    public static void writeTooFile(float value){
+        try{
+            FileWriter file =new FileWriter("sequentialTime.txt",true);
+            file.write(value+"");
+            file.write(System.getProperty( "line.separator" ));
+            file.close();
+            
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     /**
      * Main method currently gets the name of the file to read and written to.

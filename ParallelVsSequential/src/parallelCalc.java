@@ -8,6 +8,7 @@
  *
  * @author Georgeo
  */
+import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
 public class parallelCalc {
@@ -35,9 +36,10 @@ public class parallelCalc {
             time=time+tock();
         }
         System.out.println("Run Took: "+time/5+ " seconds");
+        writeTooFile(time/5);
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
-        obj.writeData(fileW, wind);
+        //obj.writeData(fileW, wind);
     }
     public static long startTime=0;
     /**
@@ -52,5 +54,21 @@ public class parallelCalc {
      */
     public static float tock(){
         return (System.currentTimeMillis()-startTime)/1000.0f;
+    }
+    /**
+     * Write to sequential time to a file method
+     * @param value 
+     */
+    public static void writeTooFile(float value){
+        try{
+            FileWriter file =new FileWriter("parallelTimes.txt",true);
+             file.write("SC: 100 Time: "+value+"");
+            file.write(System.getProperty( "line.separator" ));
+            file.close();
+            
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
