@@ -39,7 +39,7 @@ public class parallelCalc {
         writeTooFile(time/5);
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
-        //obj.writeData(fileW, wind);
+        obj.writeData(fileW, wind);
     }
     public static long startTime=0;
     /**
@@ -62,7 +62,7 @@ public class parallelCalc {
     public static void writeTooFile(float value){
         try{
             FileWriter file =new FileWriter("parallelTimes.txt",true);
-             file.write("SC: 100 Time: "+value+"");
+             file.write("SC: 100000 Time: "+value+"");
             file.write(System.getProperty( "line.separator" ));
             file.close();
             
