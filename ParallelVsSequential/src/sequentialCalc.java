@@ -14,8 +14,7 @@ public class sequentialCalc {
     /**
      * The average method is used to trace through the each time step and the matrix within it
      * It will calculate the total average of the x and y components and store it in a vector object that it sent as an argument to writeData method in cloud data
-     * It also has a call to the localAverage method within this class to return the wind magnitude of the current element in the matrix
-     * The classification is determined for each element using the wind magnitude and the uplift.
+     * It also has a call to the localAverage method within this class
      * @param fileR 
      * @param fileW 
      */
@@ -49,11 +48,11 @@ public class sequentialCalc {
     /**
      * LocalAverage method is used to calculate the wind magnitude of the current element in the matrix.
      * there are 9 different cases depending on which element we currently are on
+     *  The classification is determined for each element using the wind magnitude and the uplift.
      * @param t
      * @param x
      * @param y
-     * @param obj
-     * @return 
+     * @param obj 
      */
     public static void localAverage(int t,int x,int y,CloudData obj){
         float localAvgX=0;

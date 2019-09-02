@@ -6,14 +6,14 @@
 
 /**
  *
- * @author George
+ * @author Georgeo
  */
 import java.util.concurrent.RecursiveTask;
 public class Parallel extends RecursiveTask<Vector> {
     CloudData obj;
     int hi;
     int lo;
-    static final int SEQUENTIAL_CUTOFF=1000;
+    static final int SEQUENTIAL_CUTOFF=1000000;
     int[] ind=new int[3];
     float xTotal=0;
     float yTotal=0;
@@ -57,6 +57,15 @@ public class Parallel extends RecursiveTask<Vector> {
 		  }
         
     }
+    /**
+     * LocalAverage method is used to calculate the wind magnitude of the current element in the matrix.
+     * there are 9 different cases depending on which element we currently are on
+     *  The classification is determined for each element using the wind magnitude and the uplift.
+     * @param t
+     * @param x
+     * @param y
+     * @param obj
+     */
     public static void localAverage(int t,int x,int y,CloudData obj){
         float localAvgX=0;
         float localAvgY=0;
