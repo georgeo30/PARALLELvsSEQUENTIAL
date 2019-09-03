@@ -29,17 +29,17 @@ public class parallelCalc {
         //System.out.println(size);
         float time=0;
         Vector ans=new Vector();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<500;i++){
             System.gc();
             tick();
             ans=sum(obj,size);
             time=time+tock();
         }
-        System.out.println("Run Took: "+time/5+ " seconds");
-        writeTooFile(time/5);
+        System.out.println("Run Took: "+time/500+ " seconds");
+        writeTooFile(time/500);
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
-        obj.writeData(fileW, wind);
+        //obj.writeData(fileW, wind);
     }
     public static long startTime=0;
     /**
@@ -62,7 +62,7 @@ public class parallelCalc {
     public static void writeTooFile(float value){
         try{
             FileWriter file =new FileWriter("parallelTimes.txt",true);
-             file.write("SC: 100000 Time: "+value+"");
+             file.write("SC: 100000 Data: 500 Time: "+value+"");
             file.write(System.getProperty( "line.separator" ));
             file.close();
             

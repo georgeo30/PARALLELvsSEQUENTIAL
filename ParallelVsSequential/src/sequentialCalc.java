@@ -26,7 +26,7 @@ public class sequentialCalc {
         CloudData obj=new CloudData();
         obj.readData(fileR);
         float time=0;
-        for(int i=0;i<5;i++){
+        for(int i=0;i<500;i++){
         float xTotal=0;
         float yTotal=0;
         tick();
@@ -43,9 +43,9 @@ public class sequentialCalc {
         wind.y=yTotal/obj.dim();
         time=time+tock();
         }
-        System.out.println("Run Took: "+time/5+ " seconds");
-        writeTooFile(time/5);
-        obj.writeData(fileW, wind);
+        System.out.println("Run Took: "+time/500+ " seconds");
+        writeTooFile(time/500);
+        //obj.writeData(fileW, wind);
     }
     /**
      * LocalAverage method is used to calculate the wind magnitude of the current element in the matrix.
