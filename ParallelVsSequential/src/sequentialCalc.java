@@ -16,6 +16,7 @@ public class sequentialCalc {
      * The average method is used to trace through the each time step and the matrix within it
      * It will calculate the total average of the x and y components and store it in a vector object that it sent as an argument to writeData method in cloud data
      * It also has a call to the localAverage method within this class
+     * time is calculated by getting an average of 500 times
      * @param fileR 
      * @param fileW 
      */
@@ -45,7 +46,7 @@ public class sequentialCalc {
         }
         System.out.println("Run Took: "+time/500+ " seconds");
         writeTooFile(time/500);
-        //obj.writeData(fileW, wind);
+        obj.writeData(fileW, wind);
     }
     /**
      * LocalAverage method is used to calculate the wind magnitude of the current element in the matrix.

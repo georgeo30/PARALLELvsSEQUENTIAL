@@ -17,13 +17,24 @@ public class Parallel extends RecursiveTask<Vector> {
     int[] ind=new int[3];
     float xTotal=0;
     float yTotal=0;
-    
+    /**
+     * constructor
+     * assigns variables
+     * @param obj
+     * @param lo
+     * @param size 
+     */
     Parallel(CloudData obj,int lo,int size){
         this.obj=obj;
         this.hi=size;
         this.lo=lo;
     }
-    
+    /**
+     * compute method
+     * classification and prevailing win average is done in here
+     * locate method from cloudData is used to minimize using 3 for loops to trace through
+     * @return 
+     */
     @Override
     protected Vector compute() {
         
@@ -32,27 +43,22 @@ public class Parallel extends RecursiveTask<Vector> {
 		      for(int i=lo; i < hi; i++){
 		        obj.locate(i, ind);
                         int t=ind[0];
-                        int x=ind[1];
-                        
+                        int x=ind[1];                        
                         int y=ind[2];
-                        xTotal+=obj.advection[t][x][y].x;
-                        
+                        xTotal+=obj.advection[t][x][y].x;                        
                         yTotal+=obj.advection[t][x][y].y;
-                        localAverage(t,x,y,obj);
-                        
+                        localAverage(t,x,y,obj);                        
                       }
                         return new Vector(xTotal,yTotal);
 		  }
 		  else {
 			  Parallel left = new Parallel(obj,lo,(hi+lo)/2);
-			  Parallel right= new Parallel(obj,(hi+lo)/2,hi);
-			  
+			  Parallel right= new Parallel(obj,(hi+lo)/2,hi);			  
 			  // order of next 4 lines
 			  // essential â€“ why?
 			  left.fork();
 			  Vector rightAns = right.compute();
-			  Vector leftAns  = left.join();
-                                                   
+			  Vector leftAns  = left.join();                                                   
 			  return new Vector(rightAns.x+leftAns.x,rightAns.y+leftAns.y);      
 		  }
         

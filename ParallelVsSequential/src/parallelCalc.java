@@ -13,9 +13,24 @@ import java.util.Scanner;
 import java.util.concurrent.ForkJoinPool;
 public class parallelCalc {
     static final ForkJoinPool fjPool = new ForkJoinPool();
+    /**
+     * call to start the parallel program
+     * @param obj
+     * @param size
+     * @return 
+     */
 	static Vector sum(CloudData obj,int size){
 	  return fjPool.invoke(new Parallel(obj,0,size));
 	}
+        /**
+         * main method
+         * consists of reading the file
+         * makes a call to sum
+         * to start the parallel part
+         * time for parallel part is calculated by getting an average of 500 times.
+         * writes the data to the file
+         * @param args 
+         */
     public static void main(String[] args) {
         Vector wind=new Vector();
         CloudData obj=new CloudData();
@@ -39,7 +54,7 @@ public class parallelCalc {
         writeTooFile(time/500);
         wind.x=(ans.x)/obj.dim();
         wind.y=ans.y/obj.dim();
-        //obj.writeData(fileW, wind);
+        obj.writeData(fileW, wind);
     }
     public static long startTime=0;
     /**
@@ -56,7 +71,7 @@ public class parallelCalc {
         return (System.currentTimeMillis()-startTime)/1000.0f;
     }
     /**
-     * Write to sequential time to a file method
+     * Write to parallel time to a file method
      * @param value 
      */
     public static void writeTooFile(float value){
