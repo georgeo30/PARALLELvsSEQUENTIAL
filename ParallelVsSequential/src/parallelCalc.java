@@ -19,13 +19,13 @@ public class parallelCalc {
      * @param size
      * @return 
      */
-	static Vector sum(CloudData obj,int size){
+	static Vector invokeP(CloudData obj,int size){
 	  return fjPool.invoke(new Parallel(obj,0,size));
 	}
         /**
          * main method
          * consists of reading the file
-         * makes a call to sum
+         * makes a call to invokeP
          * to start the parallel part
          * time for parallel part is calculated by getting an average of 500 times.
          * writes the data to the file
@@ -47,7 +47,7 @@ public class parallelCalc {
         for(int i=0;i<500;i++){
             System.gc();
             tick();
-            ans=sum(obj,size);
+            ans=invokeP(obj,size);
             time=time+tock();
         }
         System.out.println("Run Took: "+time/500+ " seconds");
