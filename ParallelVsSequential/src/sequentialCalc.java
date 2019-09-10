@@ -149,11 +149,11 @@ public class sequentialCalc {
      * @param args 
      */
     public static void main(String[] args) {
-        Scanner in =new Scanner(System.in);
-        System.out.println("File in");
-        String fileR=in.nextLine();
-        System.out.println("File out");
-        String fileW=in.nextLine();
+        //Scanner in =new Scanner(System.in);
+        //System.out.println("File in");
+        String fileR=args[0];
+       // System.out.println("File out");
+        String fileW=args[0];
         average(fileR,fileW);
         
                 

@@ -35,10 +35,10 @@ public class parallelCalc {
         Vector wind=new Vector();
         CloudData obj=new CloudData();
         Scanner in =new Scanner(System.in);
-        System.out.println("File in");
-        String fileR=in.nextLine();
-        System.out.println("File out");
-        String fileW=in.nextLine();
+        //System.out.println("File in");
+        String fileR=args[0];
+        //System.out.println("File out");
+        String fileW=args[1];
         obj.readData(fileR);
         int size=obj.dim();
         //System.out.println(size);
@@ -77,7 +77,7 @@ public class parallelCalc {
     public static void writeTooFile(float value){
         try{
             FileWriter file =new FileWriter("parallelTimes.txt",true);
-             file.write("SC: 100000 Data: 500 Time: "+value+"");
+             file.write("SC: 10000 Data: 500 Time: "+value+"");
             file.write(System.getProperty( "line.separator" ));
             file.close();
             
