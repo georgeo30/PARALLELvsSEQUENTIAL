@@ -13,7 +13,7 @@ public class Parallel extends RecursiveTask<Vector> {
     CloudData obj;
     int hi;
     int lo;
-    static final int SEQUENTIAL_CUTOFF=100000;
+    static final int SEQUENTIAL_CUTOFF=100;
     int[] ind=new int[3];
     float xTotal=0;
     float yTotal=0;
