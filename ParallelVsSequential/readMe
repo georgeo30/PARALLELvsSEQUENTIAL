@@ -1,0 +1,30 @@
+Instructions for execution:
+
+In the terminal: the user can type in make to compile all the .java files in the src folder and save them in the bin folder.
+The make file commands are as follows
+
+>>make : this compiles all . java files
+
+>>make doc : to provide documentation for the .java files
+  
+ // Please note that the doc folder has already been created. If the user wished to test the make doc method, please delete the doc folder before running the command.
+
+>>make clean : to clean out the folders.
+
+If the user wishes to test out the java programs please follow the steps:
+
+1) place the input file that you would like to test in the bin folder
+2) navigate yourself to the bin folder from terminal
+3) use the java command method example : java sequentialCalc input.txt output.txt
+4) the output file will be placed in the bin folder 
+
+Step 2 above is how the program takes in the input and output file names when run
+
+to run serial program: java sequentialCalc input.txt output.txt
+to run parallel program: java parallelCalc input.txt output.txt
+
+input.txt being any file that you want the program to read.
+
+Please note that when you are testing, the time is an average from a run of 500 tries and thus, if your input data is large, it will take a very long time. The reasoning for 500 is explained in the report. If you would like it to be quicker, you can just change the code in both the serialCalc and parallelCalc from running it 500 times and time being divided by 500.
+
+The results and graphs of all the test performed in this experiment can be found in the Test folder.
